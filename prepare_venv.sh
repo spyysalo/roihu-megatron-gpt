@@ -9,8 +9,8 @@
 #SBATCH --output logs/%j.out
 #SBATCH --error logs/%j.err
 
-# Install TransformerEngine and apex into a venv using a relevant
-# module configuration.
+# Install TransformerEngine, apex and Megatron Core into a venv using
+# a relevant module configuration.
 
 # Directory to create for venv
 VENV_DIR="/scratch/$SLURM_JOB_ACCOUNT/venv/python-pytorch-megatron"
@@ -93,9 +93,14 @@ echo "START pip install for apex: $(date)"
 APEX_CPP_EXT=1 APEX_CUDA_EXT=1 pip install -v --no-build-isolation .
 echo "DONE pip install for apex: $(date)"
 
+# Install Megatron Core
+pip install megatron-core
+
 cat <<EOF
 
-Installed TransformerEngine and apex into venv in $VENV_DIR.
+Installed TransformerEngine, apex, and Megatron Core into venv in
+$VENV_DIR.
+
 Usage:
 
     module purge
