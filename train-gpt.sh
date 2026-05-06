@@ -53,7 +53,7 @@ fi
 set -euo pipefail
 
 # Megatron-LM base directory
-MEGATRON_DIR="/scratch/$SLURM_JOB_ACCOUNT/git_checkout/Megatron-LM/"
+MEGATRON_DIR="$SLURM_SUBMIT_DIR/megatron-lm/"
 
 # When slurm reschedules a job that ended on node failure, it will run
 # with the same job ID, clobbering the original logs. Rename the logs
