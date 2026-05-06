@@ -24,7 +24,8 @@ where `$ACCOUNT` is your account.
 ./download_data.sh 
 ```
 
-Prepare a venv with TransformerEngine and apex in `/scratch/$ACCOUNT/venv/python-pytorch-megatron`.
+Prepare a venv with TransformerEngine, apex and Megatron Core in
+`/scratch/$ACCOUNT/venv/python-pytorch-megatron`.
 Note that this will run on a GPU node and will take some time to complete.
 You can `tail -f logs/*` to watch progress.
 
