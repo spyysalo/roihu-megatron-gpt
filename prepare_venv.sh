@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=install-te
+#SBATCH --job-name=prepare-venv
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=480G
 #SBATCH --partition=gpupilot
