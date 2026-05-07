@@ -16,12 +16,16 @@
 VENV_DIR="/scratch/$SLURM_JOB_ACCOUNT/venv/python-pytorch-megatron"
 
 # TransformerEngine repository and branch to use
-export TE_REPO="https://github.com/NVIDIA/TransformerEngine.git"
-export TE_BRANCH="stable"
+TE_REPO="https://github.com/NVIDIA/TransformerEngine.git"
+TE_BRANCH="stable"
 
 # apex repository and commit to use (was most recent when tested)
-export APEX_REPO="https://github.com/NVIDIA/apex.git"
-export APEX_COMMIT="0857d7b"
+APEX_REPO="https://github.com/NVIDIA/apex.git"
+APEX_COMMIT="0857d7b"
+
+# Megatron-LM repository and tag to use
+MEGATRON_REPO="https://github.com/NVIDIA/Megatron-LM.git"
+MEGATRON_BRANCH="core_v0.16.1"
 
 # Check that we're running as a slurm job
 if [ -z "$SLURM_JOB_ID" ]; then
@@ -93,8 +97,15 @@ echo "START pip install for apex: $(date)"
 APEX_CPP_EXT=1 APEX_CUDA_EXT=1 pip install -v --no-build-isolation .
 echo "DONE pip install for apex: $(date)"
 
-# Install Megatron Core
-pip install megatron-core
+# Clone Megatron-LM into submit directory
+cd "$SLURM_SUBMIT_DIR"
+git clone --branch "$MEGATRON_BRANCH" "$MEGATRON_REPO"
+cd Megatron-LM
+
+# Install Megatron Core from source as editable
+echo "START pip install for Megatron Core: $(date)"
+pip install -e .
+echo "DONE pip install for Megatron Core: $(date)"
 
 cat <<EOF
 

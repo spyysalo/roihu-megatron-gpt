@@ -4,7 +4,7 @@
 #SBATCH --ntasks-per-node=4
 #SBATCH --nodes=1
 #SBATCH --mem=480G
-#SBATCH --partition=gputest
+#SBATCH --partition=gpupilot
 #SBATCH --time=00:15:00
 ##SBATCH --partition=gpupilot
 ##SBATCH --time=28:00:00
@@ -53,7 +53,7 @@ fi
 set -euo pipefail
 
 # Megatron-LM base directory
-MEGATRON_DIR="$SLURM_SUBMIT_DIR/megatron-lm/"
+MEGATRON_DIR="$SLURM_SUBMIT_DIR/Megatron-LM/"
 
 # When slurm reschedules a job that ended on node failure, it will run
 # with the same job ID, clobbering the original logs. Rename the logs
@@ -84,7 +84,7 @@ ln -sf "${logfile_basename}.err" "logs/latest.err"
 
 module purge
 module load python-pytorch 
-source /scratch/$SLURM_JOB_ACCOUNT/venv/python-pytorch-te/bin/activate
+source /scratch/$SLURM_JOB_ACCOUNT/venv/python-pytorch-megatron/bin/activate
 
 # PATHS
 BASE_DIR="$SLURM_SUBMIT_DIR"
